@@ -1,0 +1,118 @@
+<div class="col-md-12 order-md-1">
+    <mat-card class="mat-elevation-z8">
+        <div class="row">
+            <mat-toolbar color="warn">
+                <div style="color: white; text-align: right">
+                    <h1 *ngIf="isAddMode">Creación del Contribuyente</h1>
+                    <h1 *ngIf="!isAddMode">Edición del Contribuyente</h1>
+                </div>
+            </mat-toolbar>
+        </div>
+        <br>
+        <div class="CustomerDetails">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field class="full-width-input">
+                            <input matInput placeholder="Código de Contribuyente" formControlName="contribuyenteId" id="contribuyenteId" readonly/>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3">
+                        <mat-form-field class="fuse-mat-no-subscript w-full">
+                            <mat-label>Tipo de Contribuyente</mat-label>
+                            <mat-select formControlName="tipoContribuyenteId" id="tipoContribuyenteId">
+                                <mat-option> Seleccionar Tipo Contribuyente</mat-option>
+                                <mat-option *ngFor="let tipoDcto of tipoContribuyenteModel" [value]="tipoDcto.maestroId">
+                                    {{tipoDcto.nombre}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3">
+                        <mat-form-field class="fuse-mat-no-subscript w-full">
+                            <mat-label>Tipo de Documento</mat-label>
+                            <mat-select formControlName="tipoDocumento" id="tipoDocumento">
+                                <mat-option> Seleccionar Tipo Documento</mat-option>
+                                <mat-option *ngFor="let tipoDcto of tipoDocumentoModel" [value]="tipoDcto.maestroId">
+                                    {{tipoDcto.nombre}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3">
+                        <mat-form-field class="fuse-mat-no-subscript w-full">
+                            <input matInput matInput placeholder="Número de Documento" formControlName="numeroDocumento" id="numeroDocumento" />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>
+                            Datos Personal
+                        </h4>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field class="full-width-input">
+                            <input matInput placeholder="Apellido Paterno del Contribuyente" formControlName="apellidoPaterno" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="full-width-input">
+                            <input matInput placeholder="Apellido Materno del Contribuyente" formControlName="apellidoMaterno" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="full-width-input" [style.width.px]=450>
+                            <input matInput placeholder="Nombres del Contribuyente" formControlName="nombres" />
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="full-width-input">
+                            <input matInput placeholder="Celular Privado" formControlName="celular1" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="full-width-input">
+                            <input matInput placeholder="Celular Público" formControlName="celular2" />
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="full-width-input" [style.width.px]=450>
+                            <input matInput placeholder="Email Principal" formControlName="correoElectronico1" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="full-width-input" [style.width.px]=450>
+                            <input matInput placeholder="Email Alternativo" formControlName="correoElectronico2" />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-9">
+                    </div>
+                    <div class="col-md-3">
+                        <button mat-button color="siafp-gris-70" mat-flat-button routerLink="/nsrtm-rate-payer-app">
+                        Cancelar
+                    </button>
+                        <button [disabled]="registerForm.invalid" type="submit" mat-flat-button color="siaf" class="px-6 ml-3">
+                        Guardar
+                    </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </mat-card>
+</div>

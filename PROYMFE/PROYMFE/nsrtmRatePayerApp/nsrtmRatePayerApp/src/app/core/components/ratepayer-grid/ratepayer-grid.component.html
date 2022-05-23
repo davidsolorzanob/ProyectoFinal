@@ -1,0 +1,157 @@
+<div class="col-md-12 order-md-1">
+    <mat-card class="mat-elevation-z8">
+        <div class="row">
+            <mat-toolbar color="warn">
+                <div style="color: white; text-align: right">
+                    Registro del Contribuyente
+                </div>
+            </mat-toolbar>
+        </div>
+        <br>
+        <div class="col-md-12 order-md-1">
+            <form [formGroup]="miFormulario" (ngSubmit)="buscar()">
+                <div class="row" style="font-size: 13px">
+                    <div class="col-md-3">
+                        <mat-form-field [style.width.px]=295>
+                            <input matInput type="text" placeholder="Ingrese código" formControlName="IdeConParam" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field [style.width.px]=295>
+                            <input matInput type="text" placeholder="Ingrese Apellido Paterno" formControlName="ApePatParam" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field [style.width.px]=295>
+                            <input matInput type="text" placeholder="Ingrese Apellido Materno" formControlName="ApeMatParam" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field [style.width.px]=295>
+                            <input matInput type="text" placeholder="Ingrese Nombres" formControlName="NombreParam" />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                    </div>
+                    <div class="col-md-2">
+                        <button mat-raised-button color="warn" matTooltip="Buscar" type="submit">
+            Buscar Contribuyente
+          </button>
+                    </div>
+                    <div class="col-md-2">
+                        <button mat-flat-button color="warn" matTooltip="Crear" routerLink="/nsrtm-rate-payer-app/crear">
+            Crear Contribuyente
+          </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div *ngIf="contribuyentes?.length == 0" class="alert alert-info">
+                        Aun no se ha realizado la busqueda!
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br>
+        <mat-divider></mat-divider>
+        <br>
+        <div class="col-md-12 order-md-1">
+            <mat-table [dataSource]="dataSource" class="lessons-table mat-elevation-z8" #tabla1 *ngIf="contribuyentes?.length != 0">
+                <ng-container matColumnDef="contribuyenteId">
+                    <mat-header-cell *matHeaderCellDef style="background-color: #ef5350; color: white">
+                        ID
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let contribuyente" style="width: 70px">
+                        {{ contribuyente.contribuyenteId }}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="secEjec">
+                    <mat-header-cell *matHeaderCellDef style="background-color: #ef5350; color: white">
+                        MUNICIPALIDAD
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let contribuyente">
+                        {{ contribuyente.secEjec }}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="tipoContribuyenteId">
+                    <mat-header-cell *matHeaderCellDef style="background-color: #ef5350; color: white">
+                        TIPO CONTRIBUYENTE
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let contribuyente" style="width: 80px">
+                        {{ contribuyente.tipoContribuyenteId }}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="numeroDocumento">
+                    <mat-header-cell *matHeaderCellDef style="background-color: #ef5350; color: white">
+                        N° DE DOCUMENTO
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let contribuyente" style="width: 100px">
+                        {{ contribuyente.numeroDocumento }}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="apellidoPaterno">
+                    <mat-header-cell *matHeaderCellDef style="background-color: #ef5350; color: white">
+                        APELLIDO PATERNO DEL CONTRIBUYENTE
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let contribuyente" style="width: 200px">
+                        {{ contribuyente.apellidoPaterno }}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="apellidoMaterno">
+                    <mat-header-cell *matHeaderCellDef style="background-color: #ef5350; color: white">
+                        APELLIDO MATERNO DEL CONTRIBUYENTE
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let contribuyente" style="width: 250px">
+                        {{ contribuyente.apellidoMaterno }}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="nombres">
+                    <mat-header-cell *matHeaderCellDef style="background-color: #ef5350; color: white">
+                        NOMBRES DEL CONTRIBUYENTE
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let contribuyente" style="width: 250px">
+                        {{ contribuyente.nombres }}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Edit">
+                    <mat-header-cell *matHeaderCellDef style="background-color: #ef5350; color: white">
+                        EDITAR
+                    </mat-header-cell>
+                    <mat-cell mat-button [routerLink]="[
+                '/nsrtm-rate-payer-app/obtener',
+                contribuyente.contribuyenteId
+              ]" *matCellDef="let contribuyente" style="width: 50px" align="center">
+                        <button style="background-color: #ef5350; color: white">
+                <mat-icon>edit</mat-icon>
+              </button>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Delete">
+                    <mat-header-cell *matHeaderCellDef style="background-color: #ef5350; color: white">
+                        ELIMINAR
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let contribuyente" style="width: 50px" align="center">
+                        <button (click)='delete(contribuyente)' style="background-color: #ef5350; color: white">
+                <mat-icon>delete</mat-icon>
+              </button>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: columnas"></mat-row>
+            </mat-table>
+            <div>
+                <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+            </div>
+        </div>
+    </mat-card>
+</div>

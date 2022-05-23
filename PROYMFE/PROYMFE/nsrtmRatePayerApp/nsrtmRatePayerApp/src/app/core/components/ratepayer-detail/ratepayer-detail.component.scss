@@ -1,0 +1,14 @@
+.mat-button.mat-siaf {
+    color: var(--siafp-rojo);
+}
+
+.mat-raised-button.mat-siaf,
+.mat-flat-button.mat-siaf {
+    background-color: var(--siafp-rojo);
+    color: white;
+}
+
+.input,
+button {
+    font-family: var(--font-family-1);
+}

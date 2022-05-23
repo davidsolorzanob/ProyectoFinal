@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "clear.all.cache.fixed.rate",
+      "type": "java.lang.String",
+      "description": "Description for clear.all.cache.fixed.rate."
+  }
+] }
